@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}
+Borrower Page
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 mt-3">
+            <a href="#" class="btn badge-pill btn-info float-right" style="pointer-events: none;">Stocks Borrowed: <b>{{ stocks_borrowed }}</b></a>
+            <a href="#" class="btn badge-pill btn-info float-right mr-2" style="pointer-events: none;">Stocks Available: <b>{{ stocks_available }}</b></a>
+            <h2>BOOK • <span class="text-info">BORROWERS</span></h2>
+            <form action="{{ url_for('search_borrower') }}" method="GET">
+                <div class="input-group flex-nowrap mb-2">
+                    <input type="text" name="key" id="key" autocomplete="off" class="form-control badge-pill" placeholder="  Type a Keyword (Book Title, Email)" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+            </form>
+            <table class="table table-hover table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Borrowed Book</th>
+                        <th scope="col">Borrowed Date</th>
+                        <th scope="col">Returned Date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for borrower in borrowers %}
+                    {% include 'includes/modals/_modal_bookReturn.html' %}
+                        <tr>
+                            <td>{{ borrower.id }}</td>
+                            <td>{{ borrower.email }}</td>
+                            <td>{{ borrower.book_title }}</td>
+                            <td>{{ borrower.date_borrowed }}</td>
+                            <td>{{ borrower.date_returned }}</td>
+                            <td><a href="#" class="btn btn-sm badge-pill btn-info" data-toggle="modal" data-target="#bookReturn-{{ borrower.id }}">Update</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

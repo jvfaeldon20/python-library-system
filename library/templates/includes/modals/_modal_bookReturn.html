@@ -1,0 +1,26 @@
+<style>
+    .modal-content{
+        background-color: #212121;
+    }
+</style>
+<div class="modal fade" id="bookReturn-{{ borrower.id }}" tabindex="-1" aria-labelledby="infolabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="infolabel">{{ borrower.book_title }}</h6>
+        <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+          <form action="{{ url_for('borrower_update', borrower_id=borrower.id )}}" method="POST">
+            <h4 class="text-center">You are about to confirm returning this book. Do you want to continue?</h4>
+            <input class="btn btn-sm badge-pill btn-info" type="submit" value="Return Book!"/>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn badge-pill btn-sm btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

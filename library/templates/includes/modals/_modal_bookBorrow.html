@@ -1,0 +1,29 @@
+  <style>
+      .modal-content{
+          background-color: #212121;
+      }
+  </style>
+  <div class="modal fade" id="bookBorrow-{{ item.id }}" tabindex="-1" aria-labelledby="infolabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title" id="infolabel">{{ item.title }}</h6>
+          <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+            <form method="POST">
+              {{ borrow_form.hidden_tag() }}
+              <h4 class="text-center">Are you sure you want to borrow this book?</h4>
+              
+              <input id="borrowed_item" name="borrowed_item" type="hidden" value="{{ item.title }}">
+              {{ borrow_form.submit(class="btn btn-sm btn-info badge-pill") }}
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn badge-pill btn-sm btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

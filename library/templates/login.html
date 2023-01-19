@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}
+    Login Page
+{% endblock %}
+
+
+{% block content %}
+<body class="text-center">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <form method="POST" class="form-signin" style="color:white">
+                    {{ form.hidden_tag() }}
+                <img class="mt-5 mb-4" src="https://www.sunsetlearning.com/wp-content/uploads/2019/09/User-Icon-Grey-300x300.png" alt="" width="100" height="100">
+                <h1>User Login</h1>
+                <br>
+                    {{ form.username(class="form-control badge-pill mb-2",placeholder="Username") }}
+                    {{ form.password(class="form-control badge-pill",placeholder="Password") }}
+        
+                    <div class="checkbox mt-3 mb-3">
+                        <h6>Do not have an account?</h6>
+                        <a href="{{ url_for('register_page') }}" class="btn badge-pill btn-sm btn-secondary">Register</a>
+                    </div><br>
+        
+                    {{ form.submit(class="btn badge-pill btn-lg btn-block btn-info") }}
+        
+                </form>
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+</body>
+{% endblock %}
+
+

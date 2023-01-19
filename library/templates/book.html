@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block title %}
+Book Page
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="col-9">
+            {% if current_user.type != 'loc-1' %}
+                <a href="{{ url_for('new_book_page') }}" class="btn badge-pill btn-info float-right"></i>New Book</a>
+            {% else %}
+            {% endif  %}
+            <h2>BOOK • <span class="text-info">LISTS</span></h2>
+            <form action="{{ url_for('search_book') }}" method="GET">
+                <div class="input-group flex-nowrap mb-2">
+                    <input type="text" name="key" id="key" class="form-control badge-pill" autocomplete="off" placeholder="  Type a Keyword (Book Title, Genre, Author)" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+            </form>
+            <table class="table table-hover table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Stocks</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="search-list">
+                    {% for item in items %}
+                    {% include 'includes/modals/_modal_bookInfo.html' %}
+                    {% include 'includes/modals/_modal_bookBorrow.html' %}
+                    {% include 'includes/modals/_modal_bookDelete.html' %}
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.title }}</td>
+                            <td>{{ item.genre }}</td>
+                            <td>{{ item.author }}</td>
+                            
+                            <!-- {% if item.status == 1 %}
+                                status        = 'Available'
+                                category      = 'danger'
+                                allow_borrow  = 'Disabled'
+                            {% else %}
+                                status        = 'Not Available'
+                                category      = 'info'
+                            {% endif %} -->
+                            {% if item.stocks < 1 %}
+                                <td><span class="badge badge-pill badge-danger">Not Available</span></td>
+                                <td>{{ item.stocks }}</td>
+                                <td>
+                                    <a href="#" class="btn btn-sm badge-pill btn-info disabled">Borrow</a> 
+                                    <a href="#" class="btn btn-sm badge-pill btn-secondary" data-toggle='modal' data-target='#bookInfo-{{ item.id }}'><span>More Info</a>
+                                    {% if current_user.type != 'loc-1' %}
+                                        <a href="#" class="btn btn-sm badge-pill btn-danger" data-toggle="modal" data-target="#bookDelete-{{ item.id }}">Delete</a>
+                                    {% else %}
+                                    {% endif %}
+                                </td>
+                            {% else %}
+                                <td><span class="badge badge-pill badge-success">Available</span></td>
+                                <td>{{ item.stocks }}</td>
+                                <td>
+                                    <a href="#" class="btn btn-sm badge-pill btn-info" data-toggle='modal' data-target='#bookBorrow-{{ item.id }}'>Borrow</a> 
+                                    <a href="#" class="btn btn-sm badge-pill btn-secondary" data-toggle='modal' data-target='#bookInfo-{{ item.id }}'><span>More Info</a>
+                                    {% if current_user.type != 'loc-1' %}
+                                        <a href="#" class="btn btn-sm badge-pill btn-danger" data-toggle="modal" data-target="#bookDelete-{{ item.id }}">Delete</a>
+                                    {% else %}
+                                    {% endif %}
+                                </td>
+                            {% endif %}
+                            
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-3">
+            <h2>BOOK • <span class="text-info">BORROWED ITEMS</span></h2>
+            <p style="margin-top: 14px;"><b>Note:</b> All returned books should not reflect here.</p>
+            <table class="table table-hover table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Date Borrowed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for owned_item in owned_items %}
+                        <tr>
+                            <td>{{ owned_item.id }}</td>
+                            <td>{{ owned_item.book_title }}</td>
+                            <td>{{ owned_item.date_borrowed }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
