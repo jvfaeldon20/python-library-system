@@ -12,7 +12,7 @@ Register Page
                     {{ form.hidden_tag() }}
                     
                     <img class="mt-5 mb-4" src="https://www.sunsetlearning.com/wp-content/uploads/2019/09/User-Icon-Grey-300x300.png" alt="" width="100" height="100">
-                    <h1>Account Details</h1><br>
+                    <h1>Registration</h1><br>
                         {{ form.username(class='form-control badge-pill mb-2',placeholder='Username') }}
                         {{ form.email(class='form-control badge-pill mb-2',placeholder='Email Address') }}
                         {{ form.password1(class='form-control badge-pill mb-2',placeholder='Password') }}
@@ -21,7 +21,7 @@ Register Page
                         {{ form.user_type(type='hidden', class='form-control',value='loc-1') }}
         
                     <div class="checkbox mt-3 mb-3">
-                        <h6>Already have an account?</h6>
+                        <h6 class="text-info">Already have an account?</h6>
                         <a href="{{ url_for('login_page') }}" class="btn btn-sm badge-pill btn-secondary">Login</a>
                     </div><br>
                     

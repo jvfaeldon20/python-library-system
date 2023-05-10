@@ -6,7 +6,7 @@ Book Page
 {% block content %}
 <div class="container-fluid">
     <div class="row mt-3">
-        <div class="col-9">
+        <div class="col-lg-9 col-sm-12">
             {% if current_user.type != 'loc-1' %}
                 <a href="{{ url_for('new_book_page') }}" class="btn badge-pill btn-info float-right"></i>New Book</a>
             {% else %}
@@ -17,7 +17,7 @@ Book Page
                     <input type="text" name="key" id="key" class="form-control badge-pill" autocomplete="off" placeholder="  Type a Keyword (Book Title, Genre, Author)" aria-label="Username" aria-describedby="addon-wrapping">
                 </div>
             </form>
-            <table class="table table-hover table-dark">
+            <table class="table table-hover table-default">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -78,10 +78,10 @@ Book Page
                 </tbody>
             </table>
         </div>
-        <div class="col-3">
+        <div class="col-lg-3 col-sm-12">
             <h2>BOOK • <span class="text-info">BORROWED ITEMS</span></h2>
             <p style="margin-top: 14px;"><b>Note:</b> All returned books should not reflect here.</p>
-            <table class="table table-hover table-dark">
+            <table class="table table-hover table-default">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
